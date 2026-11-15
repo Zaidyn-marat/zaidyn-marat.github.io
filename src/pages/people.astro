@@ -1,0 +1,88 @@
+
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import WantedCard from '../components/WantedCard.astro';
+
+const allMembers = (await getCollection('members')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const activeMembers = allMembers.filter((m) => !m.data.alumni);
+const alumniMembers = allMembers.filter((m) => m.data.alumni);
+---
+
+<Layout title="People | Most Wanted">
+  <section>
+    <h1 class="section-title">MOST WANTED SCIENTISTS</h1>
+    <div class="grid-container">
+      {activeMembers.map((member) => (
+        <WantedCard 
+          name={member.data.name}
+          role={member.data.role}
+          bounty={member.data.bounty}
+          status={member.data.status}
+          avatar={member.data.avatar}
+          topic={member.data.topic}
+        />
+      ))}
+    </div>
+  </section>
+
+  {alumniMembers.length > 0 && (
+    <section class="alumni-section">
+      <h2 class="section-title alumni-title">ALUMNI & FORMER MEMBERS</h2>
+      <div class="grid-container">
+        {alumniMembers.map((member) => (
+          <div class="alumni-card-wrapper">
+            <WantedCard 
+              name={member.data.name}
+              role={member.data.destination ? `${member.data.role} → ${member.data.destination}` : member.data.role}
+              bounty={member.data.bounty}
+              status={member.data.status === 'ACTIVE OR ALIVE' ? 'GRADUATED' : member.data.status}
+              avatar={member.data.avatar}
+              topic={member.data.topic}
+            />
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+</Layout>
+
+<style>
+  .section-title {
+    text-align: center;
+    font-family: 'Cinzel', 'Playfair Display', serif;
+    letter-spacing: 0.14em;
+    margin-bottom: 2rem;
+    color: #111827;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, max-content));
+    justify-content: center;
+    gap: 32px;
+  }
+
+  .alumni-section {
+    margin-top: 4.5rem;
+    padding-top: 3rem;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  .alumni-title {
+    font-size: 1.5rem;
+    color: #4b5563;
+  }
+
+  /* 毕业生海报增加轻微做旧褪色效果 */
+  .alumni-card-wrapper {
+    filter: saturate(0.75) opacity(0.92);
+    transition: filter 0.2s ease;
+  }
+
+  .alumni-card-wrapper:hover {
+    filter: saturate(1) opacity(1);
+  }
+</style>

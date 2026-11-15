@@ -1,0 +1,213 @@
+---
+interface Props {
+  name: string;
+  role: string;
+  bounty: string;
+  status: string;
+  avatar: string;
+  profile: string;
+}
+
+const { name, role, bounty, status, avatar, profile } = Astro.props;
+---
+
+<div class="wanted-poster">
+  <div class="wanted-title">WANTED</div>
+
+  <div class="photo-box">
+    <img src={avatar} alt={name} />
+  </div>
+
+  <div class="bounty-section">
+    <!-- 左侧卷纹 -->
+    <svg class="scroll-ornament left" viewBox="0 0 24 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 8 C8 8, 8 20, 16 20 C20 20, 20 14, 15 14 M14 10 C12 45, 16 70, 8 80 C16 90, 12 115, 14 150 M18 152 C8 152, 8 140, 16 140 C20 140, 20 146, 15 146" 
+            stroke="#362619" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>
+
+    <div class="info-core">
+      <div class="status-line">{status}</div>
+      
+      <div class="pirate-name">{name}</div>
+
+      <div class="bounty-row">
+        <svg class="berry-icon" viewBox="0 0 28 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11 2V34M16 2V34M7 7H17C21 7 23 9.5 23 12.5C23 15.5 20.5 17.5 17 17.5H9M9 17.5H18C22 17.5 24.5 20 24.5 23.5C24.5 27 21.5 29 17.5 29H7" 
+                stroke="#362619" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="bounty-amount">{bounty}-</span>
+      </div>
+
+      <div class="poster-footer">
+        <div class="micro-stamp">
+          <div>{role}</div>
+          <div>{profile}</div>
+        </div>
+        <div class="marine-stamp">MARINE</div>
+      </div>
+    </div>
+
+    <!-- 右侧卷纹 -->
+    <svg class="scroll-ornament right" viewBox="0 0 24 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 8 C8 8, 8 20, 16 20 C20 20, 20 14, 15 14 M14 10 C12 45, 16 70, 8 80 C16 90, 12 115, 14 150 M18 152 C8 152, 8 140, 16 140 C20 140, 20 146, 15 146" 
+            stroke="#362619" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>
+  </div>
+</div>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Playfair+Display:wght@700;900&display=swap');
+
+  .wanted-poster {
+    width: 300px;
+    background-color: #ecd9b3;
+    background-image: 
+      radial-gradient(circle at 50% 50%, rgba(255, 250, 240, 0.25) 0%, rgba(168, 142, 102, 0.22) 100%);
+    padding: 14px 16px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14), 0 2px 6px rgba(0, 0, 0, 0.08);
+    color: #362619;
+    text-align: center;
+    box-sizing: border-box;
+    user-select: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .wanted-poster:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.18);
+  }
+
+  .wanted-title {
+    font-family: 'Playfair Display', 'Times New Roman', serif;
+    font-size: 3.1rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    line-height: 0.95;
+    text-transform: uppercase;
+    transform: scaleY(1.15);
+    margin: 2px 0 10px;
+    color: #362619;
+  }
+
+  .photo-box {
+    border: 1.5px solid #2b1d12;
+    background-color: #cbb692;
+    margin: 0 4px 8px;
+    overflow: hidden;
+  }
+
+  .photo-box img {
+    width: 100%;
+    height: 195px;
+    object-fit: cover;
+    display: block;
+    filter: sepia(0.22) contrast(1.08);
+  }
+
+  .bounty-section {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 2px;
+    margin-top: 4px;
+  }
+
+  .scroll-ornament {
+    width: 16px;
+    height: auto;
+    flex-shrink: 0;
+  }
+
+  .scroll-ornament.right {
+    transform: scaleX(-1);
+  }
+
+  .info-core {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .status-line {
+    font-family: 'Cinzel', 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 900;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+
+  .pirate-name {
+    font-family: 'Playfair Display', 'Times New Roman', serif;
+    font-size: 1.65rem;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.05;
+    transform: scaleY(1.22);
+    margin: 4px 0 8px;
+    word-break: break-word;
+  }
+
+  .bounty-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin: 2px 0 8px;
+  }
+
+  .berry-icon {
+    width: 18px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+
+  .bounty-amount {
+    font-family: 'Cinzel', 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    line-height: 1;
+  }
+
+  .poster-footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 6px;
+    margin-top: 2px;
+    text-align: left;
+  }
+
+  .micro-stamp {
+    font-family: sans-serif;
+    font-size: 0.44rem;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #3d2c1e;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .micro-stamp div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .marine-stamp {
+    font-family: 'Playfair Display', 'Times New Roman', serif;
+    font-size: 1.15rem;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    line-height: 0.9;
+    transform: scaleY(1.25);
+    flex-shrink: 0;
+  }
+</style>

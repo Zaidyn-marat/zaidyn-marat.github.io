@@ -1,0 +1,168 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const repos = await getCollection('software');
+---
+
+<Layout title="Software & Code | Laboratory">
+  <div class="page-header">
+    <h1>Open Source Software & Code</h1>
+    <p class="subtitle">
+      Simulation frameworks, topology generators, and data analysis pipelines maintained by our group.
+    </p>
+  </div>
+
+  <div class="repo-grid">
+    {repos.map(async (item) => {
+      const { Content } = await render(item);
+      return (
+        <article class="repo-card">
+          <div class="repo-top">
+            <h2 class="repo-name">
+              <a href={item.data.repo} target="_blank" rel="noopener">{item.data.name}</a>
+            </h2>
+            <span class="lang-badge">{item.data.language}</span>
+          </div>
+
+          <p class="repo-summary">{item.data.summary}</p>
+
+          <div class="repo-details">
+            <Content />
+          </div>
+
+          <div class="repo-links">
+            <a href={item.data.repo} target="_blank" rel="noopener" class="btn-primary">
+              GitHub Repository ↗
+            </a>
+            {item.data.paper && (
+              <a href={item.data.paper} class="btn-secondary">
+                Related Publication →
+              </a>
+            )}
+          </div>
+        </article>
+      );
+    })}
+  </div>
+</Layout>
+
+<style>
+  .page-header {
+    margin-bottom: 2rem;
+  }
+
+  .page-header h1 {
+    margin-bottom: 0.4rem;
+  }
+
+  .subtitle {
+    color: #4b5563;
+    font-size: 1rem;
+  }
+
+  .repo-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .repo-card {
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1.75rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .repo-card:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  }
+
+  .repo-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .repo-name {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 1.25rem;
+    margin: 0;
+  }
+
+  .repo-name a {
+    color: #111827;
+    text-decoration: none;
+  }
+
+  .repo-name a:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+  }
+
+  .lang-badge {
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-family: monospace;
+  }
+
+  .repo-summary {
+    color: #1f2937;
+    font-weight: 500;
+    font-size: 0.98rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .repo-details {
+    color: #4b5563;
+    font-size: 0.93rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .repo-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+  }
+
+  .btn-primary {
+    background: #111827;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    padding: 0.5rem 0.95rem;
+    border-radius: 6px;
+    transition: background-color 0.15s;
+  }
+
+  .btn-primary:hover {
+    background: #1d4ed8;
+  }
+
+  .btn-secondary {
+    background: #ffffff;
+    color: #374151;
+    border: 1px solid #d1d5db;
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    padding: 0.5rem 0.95rem;
+    border-radius: 6px;
+    transition: border-color 0.15s, color 0.15s;
+  }
+
+  .btn-secondary:hover {
+    border-color: #111827;
+    color: #111827;
+  }
+</style>

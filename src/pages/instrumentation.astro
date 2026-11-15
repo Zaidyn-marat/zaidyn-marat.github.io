@@ -1,0 +1,25 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const items = await getCollection('instrumentation');
+---
+
+<Layout title="Instrumentation | Laboratory">
+  <h1>Instrumentation & Computing Facilities</h1>
+  <div style="display: grid; gap: 1.5rem;">
+    {items.map(async (item) => {
+      const { Content } = await render(item);
+      return (
+        <div style="background: #f8fafc; padding: 1.5rem; border-radius: 6px; border-left: 4px solid #d1b48c;">
+          <div style="color: #6b7280; font-size: 0.85rem; text-transform: uppercase;">{item.data.category}</div>
+          <h2 style="color: #111827; margin: 0.3rem 0;">{item.data.name}</h2>
+          <div style="color: #1d4ed8; font-family: monospace; font-size: 0.9rem; margin-bottom: 0.8rem;">
+            {item.data.specs}
+          </div>
+          <div style="color: #374151; font-size: 0.95rem;"><Content /></div>
+        </div>
+      );
+    })}
+  </div>
+</Layout>

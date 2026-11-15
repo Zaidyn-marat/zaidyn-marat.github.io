@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const papers = (await getCollection('publications')).sort((a, b) => b.data.year - a.data.year);
+---
+
+<Layout title="Publications | Laboratory">
+  <h1> Publications</h1>
+  <ul style="list-style: none;">
+    {papers.map((paper) => (
+      <li style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #e5e7eb;">
+        <div style="font-size: 1.1rem; font-weight: bold; color: #111827;">{paper.data.title}</div>
+        <div style="color: #374151;">{paper.data.authors}</div>
+        <div style="color: #6b7280; font-size: 0.9rem;">
+          <em>{paper.data.journal}</em> ({paper.data.year})
+          {paper.data.doi && <a href={paper.data.doi} target="_blank" style="margin-left: 10px; color: #1d4ed8;">[DOI]</a>}
+        </div>
+      </li>
+    ))}
+  </ul>
+</Layout>
