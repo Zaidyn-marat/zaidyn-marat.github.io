@@ -4,9 +4,8 @@ import Layout from '../layouts/Layout.astro';
 
 const courseList = await getCollection('courses');
 ---
-
 <Layout title="Courses & Outreach | Laboratory">
-  <h1> Courses</h1>
+  <h1 data-i18n="page.courses.univ">University Courses</h1>
   <div class="course-grid">
     {courseList.map(async (course) => {
       const { Content } = await render(course);
@@ -21,29 +20,27 @@ const courseList = await getCollection('courses');
     })}
   </div>
 
-  <!-- 面向全年龄段的 STEM 机器人公开课 -->
   <section class="outreach-section">
-    <h2>Open STEM & Robotics Program (All Ages)</h2>
+    <h2 data-i18n="page.courses.outreach">Open STEM & Robotics Program (All Ages)</h2>
     <div class="chipbot-wrapper">
-      <!-- 左侧：课程与中心信息卡 -->
       <div class="chipbot-card">
         <div class="chipbot-header">
           <div>
             <h3>Chip&Bot — Центр Робототехники</h3>
-            <span class="badge">Open to Students & Seniors • Zero Prerequisites</span>
+            <span class="badge" data-i18n="chipbot.badge">Open to Students & Seniors • Zero Prerequisites</span>
           </div>
           <a href="https://www.instagram.com/chip_and_bot/" target="_blank" rel="noopener" class="ig-btn">
             @chip_and_bot ↗
           </a>
         </div>
 
-        <p class="chipbot-bio">
-          Hands-on robotics and embedded engineering workshops designed for everyone—from school and university students to lifelong learners and seniors. Learn to build working robots from scratch using <strong>Arduino</strong>, <strong>Raspberry Pi</strong>, and <strong>ESP32</strong>.
+        <p class="chipbot-bio" data-i18n="chipbot.bio">
+          Hands-on robotics and embedded engineering workshops designed for everyone—from school and university students to lifelong learners and seniors. Learn to build working robots from scratch using Arduino, Raspberry Pi, and ESP32.
         </p>
 
         <div class="chipbot-details">
-          <div><strong>Location:</strong> Almaty, KazNU, Al-Farabi 71/23</div>
-          <div><strong>Curriculum:</strong> Electronics, Microcontrollers, Sensors & STEM Projects</div>
+          <div data-i18n="chipbot.loc">Location: Almaty, KazNU, Al-Farabi 71/23</div>
+          <div data-i18n="chipbot.curr">Curriculum: Electronics, Microcontrollers, Sensors & STEM Projects</div>
         </div>
 
         <div class="chipbot-actions">
@@ -56,7 +53,6 @@ const courseList = await getCollection('courses');
         </div>
       </div>
 
-      <!-- 右侧：Instagram 官方主页嵌入窗口（若被浏览器拦截可删掉此 div） -->
       <div class="ig-embed-box">
         <iframe
           src="https://www.instagram.com/chip_and_bot/embed"

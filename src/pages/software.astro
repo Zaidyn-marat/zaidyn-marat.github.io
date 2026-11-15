@@ -7,8 +7,8 @@ const repos = await getCollection('software');
 
 <Layout title="Software & Code | Laboratory">
   <div class="page-header">
-    <h1>Open Source Software & Code</h1>
-    <p class="subtitle">
+    <h1 data-i18n="page.sw.title">Open Source Software & Code</h1>
+    <p class="subtitle" data-i18n="page.sw.sub">
       Simulation frameworks, topology generators, and data analysis pipelines maintained by our group.
     </p>
   </div>
@@ -32,11 +32,11 @@ const repos = await getCollection('software');
           </div>
 
           <div class="repo-links">
-            <a href={item.data.repo} target="_blank" rel="noopener" class="btn-primary">
+            <a href={item.data.repo} target="_blank" rel="noopener" class="btn-primary" data-i18n="page.sw.btn_repo">
               GitHub Repository ↗
             </a>
             {item.data.paper && (
-              <a href={item.data.paper} class="btn-secondary">
+              <a href={item.data.paper} class="btn-secondary" data-i18n="page.sw.btn_paper">
                 Related Publication →
               </a>
             )}

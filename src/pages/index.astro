@@ -37,56 +37,60 @@ if (fs.existsSync(lifeDir)) {
 ---
 
 <Layout title="Laboratory | Physics, Astrophysics & Complex Networks">
-  <!-- 首屏：全宽动态拓扑背景 + 极简排版 -->
   <header class="hero" id="hero-area">
     <canvas id="topology-canvas"></canvas>
 
     <div class="hero-content">
-      <div class="affiliation">KAZNU • DEPARTMENT OF PHYSICS</div>
-      <h1>Astrophysics, Complex Networks &amp; Autonomous Systems.</h1>
-      <p class="hero-sub">
-        Gravitational-wave, star clusters, networks, and embedded vision.
+      <div class="affiliation" data-i18n="hero.affil">KAZNU • DEPARTMENT OF PHYSICS</div>
+      <h1 data-i18n="hero.title">Astrophysics, Complex Networks &amp; Autonomous Systems.</h1>
+      <p class="hero-sub" data-i18n="hero.sub">
+        Gravitational-wave inference, star cluster topology, entropic networks, and embedded vision.
       </p>
       <div class="hero-actions">
-        <a href="/research" class="btn-solid">Research →</a>
-        <a href="/publications" class="btn-line">Publications ({allPubs.length})</a>
+        <a href="/research" class="btn-solid" data-i18n="hero.btn_research">Research →</a>
+        <a href="/publications" class="btn-line">
+          <span data-i18n="hero.btn_pubs">Publications</span> ({allPubs.length})
+        </a>
       </div>
     </div>
   </header>
 
-  <!-- 第二屏：带直觉大图的三大研究支柱 -->
   <section class="home-section">
     <div class="section-header">
-      <h2>Research Directions</h2>
-      <a href="/research" class="section-more">Overview ↗</a>
+      <h2 data-i18n="sec.directions">Research Directions</h2>
+      <a href="/research" class="section-more" data-i18n="sec.overview">Overview ↗</a>
     </div>
 
     <div class="visual-pillars">
-      {researchList.map((item, idx) => (
-        <a href="/research" class="pillar-card">
-          <div class="pillar-img-wrap">
-            {item.data.image ? (
-              <img src={item.data.image} alt={item.data.title} />
-            ) : (
-              <div class="img-placeholder">0{idx + 1}</div>
-            )}
-          </div>
-          <div class="pillar-meta">
-            <span class="pillar-num">{String(idx + 1).padStart(2, '0')}</span>
-            <h3>{item.data.title}</h3>
-            <p>{item.data.summary}</p>
-          </div>
-        </a>
-      ))}
+      {researchList.map((item, idx) => {
+        const prefix = item.id.includes('astro') ? 'dir.astro' : item.id.includes('net') ? 'dir.net' : 'dir.vis';
+        return (
+          <a href="/research" class="pillar-card">
+            <div class="pillar-img-wrap">
+              {item.data.image ? (
+                <img src={item.data.image} alt={item.data.title} />
+              ) : (
+                <div class="img-placeholder">0{idx + 1}</div>
+              )}
+            </div>
+            <div class="pillar-meta">
+              <span class="pillar-num">{String(idx + 1).padStart(2, '0')}</span>
+              <h3 data-i18n={`${prefix}.title`}>{item.data.title}</h3>
+              <p data-i18n={`${prefix}.sum`}>{item.data.summary}</p>
+            </div>
+          </a>
+        );
+      })}
     </div>
   </section>
 
-  <!-- 第三屏：代表性学术成果 -->
   {featuredPubs.length > 0 && (
     <section class="home-section">
       <div class="section-header">
-        <h2>Selected Publications</h2>
-        <a href="/publications" class="section-more">All ({allPubs.length}) ↗</a>
+        <h2 data-i18n="sec.selected_pubs">Selected Publications</h2>
+        <a href="/publications" class="section-more">
+          <span data-i18n="sec.all">All ↗</span> ({allPubs.length})
+        </a>
       </div>
 
       <div class="pub-feed">
@@ -113,12 +117,11 @@ if (fs.existsSync(lifeDir)) {
     </section>
   )}
 
-  <!-- 第四屏：实验室日常快照预览 -->
   {previewPhotos.length > 0 && (
     <section class="home-section">
       <div class="section-header">
-        <h2>Inside the Lab</h2>
-        <a href="/media" class="section-more">Gallery ↗</a>
+        <h2 data-i18n="sec.inside_lab">Inside the Lab</h2>
+        <a href="/media" class="section-more" data-i18n="sec.gallery">Gallery ↗</a>
       </div>
       <div class="life-strip">
         {previewPhotos.map((src) => (

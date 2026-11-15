@@ -15,26 +15,24 @@ if (fs.existsSync(lifeDir)) {
     .map((file) => `/images/life/${file}`);
 }
 ---
-
 <Layout title="Media & Outreach | Laboratory">
   <header class="page-intro">
-    <h1>Media & Outreach</h1>
-    <p class="lead">
+    <h1 data-i18n="page.media.title">Media & Outreach</h1>
+    <p class="lead" data-i18n="page.media.lead">
       Astronomy science communication, lab soundtracks, and snapshots from our daily work.
     </p>
   </header>
 
   <div class="editorial-list">
-    <!-- 01: 天文社交媒体  Köknükte -->
     <section class="media-row">
       <div class="row-meta">
         <span class="index-num">01</span>
-        <h2> Köknükte</h2>
-        <p class="thesis">Astronomy & Astrophysics Outreach</p>
+        <h2>Köknükte</h2>
+        <p class="thesis" data-i18n="media.pk.sub">Astronomy & Astrophysics Outreach</p>
       </div>
 
       <div class="row-content">
-        <p class="prose">
+        <p class="prose" data-i18n="media.pk.desc">
           Our independent science communication project dedicated to astrophysics, cosmology, and space exploration. Follow our regular dispatches, visual explainers, and video essays across Instagram and YouTube.
         </p>
 
@@ -49,16 +47,15 @@ if (fs.existsSync(lifeDir)) {
       </div>
     </section>
 
-    <!-- 02: 实验室工作 Playlist 合集 -->
     <section class="media-row">
       <div class="row-meta">
         <span class="index-num">02</span>
-        <h2>Lab Work Sessions</h2>
-        <p class="thesis">Curated Research & Coding Playlist</p>
+        <h2 data-i18n="media.pl.title">Lab Work Sessions</h2>
+        <p class="thesis" data-i18n="media.pl.sub">Curated Research & Coding Playlist</p>
       </div>
 
       <div class="row-content">
-        <p class="prose">
+        <p class="prose" data-i18n="media.pl.desc">
           The audio rotation accompanying our N-body simulations, late-night data reduction, and manuscript drafts.
         </p>
 
@@ -80,13 +77,12 @@ if (fs.existsSync(lifeDir)) {
       </div>
     </section>
 
-    <!-- 03: 生活与团建照片墙（有照片时自动显示） -->
     {lifePhotos.length > 0 && (
       <section class="gallery-section">
         <div class="gallery-header">
           <div>
             <span class="index-num">03</span>
-            <h2>Life & Moments</h2>
+            <h2 data-i18n="media.life.title">Life & Moments</h2>
           </div>
           <span class="photo-count">{lifePhotos.length} ARCHIVED FRAMES</span>
         </div>

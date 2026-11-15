@@ -10,10 +10,9 @@ const allMembers = (await getCollection('members')).sort(
 const activeMembers = allMembers.filter((m) => !m.data.alumni);
 const alumniMembers = allMembers.filter((m) => m.data.alumni);
 ---
-
 <Layout title="People | Most Wanted">
   <section>
-    <h1 class="section-title">MOST WANTED SCIENTISTS</h1>
+    <h1 class="section-title" data-i18n="page.people.active">MOST WANTED SCIENTISTS</h1>
     <div class="grid-container">
       {activeMembers.map((member) => (
         <WantedCard 
@@ -30,7 +29,7 @@ const alumniMembers = allMembers.filter((m) => m.data.alumni);
 
   {alumniMembers.length > 0 && (
     <section class="alumni-section">
-      <h2 class="section-title alumni-title">ALUMNI & FORMER MEMBERS</h2>
+      <h2 class="section-title alumni-title" data-i18n="page.people.alumni">ALUMNI & FORMER MEMBERS</h2>
       <div class="grid-container">
         {alumniMembers.map((member) => (
           <div class="alumni-card-wrapper">

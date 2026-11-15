@@ -50,10 +50,9 @@ const courses = defineCollection({
 const instrumentation = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/instrumentation' }),
   schema: z.object({
-    name: z.string(),
-    category: z.string(), // 例如 "Computing Cluster" 或 "Telescope / Hardware"
-    specs: z.string(),    // 核心参数，如 "RTX 4070 Ti / 32GB RAM / Ubuntu"
-    image: z.string().optional(),
+    title: z.string(),
+    specs: z.string(),
+    order: z.number().default(99),
   }),
 });
 const software = defineCollection({

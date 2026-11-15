@@ -7,22 +7,22 @@ const projects = (await getCollection('research')).sort((a, b) => a.data.order -
 
 <Layout title="Research | Laboratory">
   <header class="page-intro">
-    <h1>Research</h1>
-    <p class="lead">
+    <h1 data-i18n="page.research.title">Research</h1>
+    <p class="lead" data-i18n="page.research.lead">
       Theoretical modeling, complex network topology, and autonomous systems across astrophysics and communications.
     </p>
   </header>
 
   <div class="editorial-list">
-    {projects.map(async (project, index) => {
-      const { Content } = await render(project);
+    {projects.map((project, index) => {
       const num = String(index + 1).padStart(2, '0');
+      const prefix = project.id.includes('astro') ? 'astro' : project.id.includes('net') ? 'net' : 'vis';
       return (
         <section class="research-row">
           <div class="row-meta">
             <span class="index-num">{num}</span>
-            <h2>{project.data.title}</h2>
-            <p class="thesis">{project.data.summary}</p>
+            <h2 data-i18n={`dir.${prefix}.title`}>{project.data.title}</h2>
+            <p class="thesis" data-i18n={`dir.${prefix}.sum`}>{project.data.summary}</p>
           </div>
 
           <div class="row-content">
@@ -32,7 +32,8 @@ const projects = (await getCollection('research')).sort((a, b) => a.data.order -
               </figure>
             )}
             <div class="prose">
-              <Content />
+              <p data-i18n={`prose.${prefix}.p1`}></p>
+              <p data-i18n={`prose.${prefix}.p2`}></p>
             </div>
           </div>
         </section>
