@@ -4,4 +4,3 @@ title: "Chip and bot"
 semester: "Fall 2026"
 instructor: "Prof. Dana"
 ---
-robots
