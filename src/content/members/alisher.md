@@ -1,6 +1,6 @@
 ---
 name: "ALISHER·Z"
-bounty: "1,032,000,000"
+bounty: "American Footballer& ML Killer"
 role: "MSc student"
 order: 8
 orcid: “0009-0002-5435-9740”
